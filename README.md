@@ -38,7 +38,7 @@ This will result in a `k6` binary in the current directory.
 ## Document template
 
 * `name`, `type` = `string`
-* `time` = `int64 (epoch milli)`
+* `time` = `int64` _(epoch milli)_
 * `Value` = `float64`
 * `Tags` = `map[string]string`
 
@@ -71,3 +71,6 @@ This will result in a `k6` binary in the current directory.
 * Embedded index templating pushed by the plugin (auto creation)
 * Dashboard examples
 * log verbosity / error catching edge cases
+
+Even if this project doesn't really require daily support, we're using it in real life !
+_PR & issues are open to anyone._

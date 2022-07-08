@@ -38,7 +38,7 @@ This will result in a `k6` binary in the current directory.
 ## Document template
 
 * `name`, `type` = `string`
-* `time` = `int64` _(epoch milli)_
+* `@timestamp` = `int64` _(epoch milli)_
 * `Value` = `float64`
 * `Tags` = `map[string]string`
 
@@ -48,7 +48,7 @@ This will result in a `k6` binary in the current directory.
 {
   "name": "http_req_waiting",
   "type": "trend",
-  "time": 1654968030083,
+  "@timestamp": 1654968030083,
   "Tags": {
     "expected_response": "true",
     "function": "foo",

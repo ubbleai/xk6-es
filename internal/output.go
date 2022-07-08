@@ -11,11 +11,11 @@ import (
 )
 
 type XK6ElasticSample struct {
-	Name  string            `json:"name"`
-	Type  string            `json:"type"`
-	Time  int64             `json:"time"`
-	Tags  map[string]string `tags:"tags"`
-	Value float64           `tags:"value"`
+	Name      string            `json:"name"`
+	Type      string            `json:"type"`
+	Timestamp int64             `json:"@timestamp"`
+	Tags      map[string]string `tags:"tags"`
+	Value     float64           `tags:"value"`
 }
 
 // Output implements the lib.Output interface
@@ -92,11 +92,11 @@ func (o *Output) flushMetrics() {
 
 		for _, sample := range samples {
 			esSample := XK6ElasticSample{
-				Name:  sample.Metric.Name,
-				Type:  sample.Metric.Type.String(),
-				Tags:  sample.Tags.CloneTags(),
-				Time:  sample.Time.UnixMilli(),
-				Value: sample.Value,
+				Name:      sample.Metric.Name,
+				Type:      sample.Metric.Type.String(),
+				Tags:      sample.Tags.CloneTags(),
+				Timestamp: sample.Time.UnixMilli(),
+				Value:     sample.Value,
 			}
 
 			if bulkRequest.NumberOfActions() >= o.config.MaxBulkSize {

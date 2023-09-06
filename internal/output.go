@@ -2,10 +2,12 @@ package es
 
 import (
 	"context"
+	"maps"
 	"time"
 
 	elastic "github.com/olivere/elastic/v7"
 	"github.com/sirupsen/logrus"
+	"golang.org/x/exp/maps"
 
 	"go.k6.io/k6/output"
 )
@@ -91,10 +93,12 @@ func (o *Output) flushMetrics() {
 		count += len(samples)
 
 		for _, sample := range samples {
+			tags := sample.Tags.Map()
+			maps.Copy(tags, sample.Metadata)
 			esSample := XK6ElasticSample{
 				Name:      sample.Metric.Name,
 				Type:      sample.Metric.Type.String(),
-				Tags:      sample.Tags.Map(),
+				Tags:      tags,
 				Timestamp: sample.Time.UnixMilli(),
 				Value:     sample.Value,
 			}

@@ -21,24 +21,27 @@ func TestConfig(t *testing.T) {
 	}{
 		"default": {
 			config: Config{
-				Address:      "template",
+				Address:      "http://127.0.0.1:9200",
 				PushInterval: 1 * time.Second,
+				MaxBulkSize:  2048,
 			},
 		},
 
 		"overwrite": {
-			env: map[string]string{"K6_TEMPLATE_ADDRESS": "else", "K6_TEMPLATE_PUSH_INTERVAL": "4ms"},
+			env: map[string]string{"K6_ES_ADDRESS": "else", "K6_ES_PUSH_INTERVAL": "4ms"},
 			config: Config{
 				Address:      "else",
 				PushInterval: 4 * time.Millisecond,
+				MaxBulkSize:  2048,
 			},
 		},
 
 		"early error": {
-			env: map[string]string{"K6_TEMPLATE_ADDRESS": "else", "K6_TEMPLATE_PUSH_INTERVAL": "4something"},
+			env: map[string]string{"K6_ES_ADDRESS": "else", "K6_ES_PUSH_INTERVAL": "4something"},
 			config: Config{
 				Address:      "else",
 				PushInterval: 1 * time.Second,
+				MaxBulkSize:  2048,
 			},
 			err: `time: unknown unit "something" in duration "4something"`,
 		},

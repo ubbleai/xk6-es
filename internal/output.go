@@ -7,7 +7,6 @@ import (
 
 	elastic "github.com/olivere/elastic/v7"
 	"github.com/sirupsen/logrus"
-	"golang.org/x/exp/maps"
 
 	"go.k6.io/k6/output"
 )
